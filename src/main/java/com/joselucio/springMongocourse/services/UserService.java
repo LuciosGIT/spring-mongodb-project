@@ -23,4 +23,9 @@ public class UserService {
 		Optional<LinkedinUser> user = userRepository.findById(id);
 		return user.get();
 	}
+	
+	public void insert(LinkedinUser obj) {
+		userRepository.insert(obj);
+		
+	}
 }
