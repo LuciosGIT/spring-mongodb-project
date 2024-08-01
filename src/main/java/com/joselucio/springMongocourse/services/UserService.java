@@ -28,4 +28,21 @@ public class UserService {
 		userRepository.insert(obj);
 		
 	}
+	
+	public void delete(String id) {
+		userRepository.deleteById(id);
+	}
+ 
+	public LinkedinUser update(LinkedinUser obj) {
+		Optional<LinkedinUser> newObj = userRepository.findById(obj.getId());
+		updateData(newObj, obj);
+		return userRepository.save(newObj.get());
+	}
+	
+	private void updateData(Optional<LinkedinUser> newObj, LinkedinUser obj) {
+		newObj.get().setName(obj.getName());
+		newObj.get().setEmail(obj.getEmail());
+		newObj.get().setGithub(obj.getGithub());
+		
+	}
 }
