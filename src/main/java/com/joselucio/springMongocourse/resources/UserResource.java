@@ -23,7 +23,7 @@ import com.joselucio.springMongocourse.services.UserService;
 public class UserResource {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	
 	@GetMapping

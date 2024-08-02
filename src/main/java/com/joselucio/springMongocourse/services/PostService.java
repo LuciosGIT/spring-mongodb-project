@@ -13,7 +13,7 @@ import com.joselucio.springMongocourse.repositories.PostRepository;
 public class PostService {
 	
 	@Autowired
-	PostRepository postRepository;
+	private PostRepository postRepository;
 	
 	public Posts findById(String id){
 		Optional<Posts> post = postRepository.findById(id);

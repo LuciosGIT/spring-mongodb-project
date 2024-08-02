@@ -14,7 +14,7 @@ import com.joselucio.springMongocourse.repositories.UserRepository;
 public class UserService {
 	
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 	
 	public List<LinkedinUser> findAll(){
 		List<LinkedinUser> list = userRepository.findAll();
