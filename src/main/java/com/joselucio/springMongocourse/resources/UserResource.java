@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.joselucio.springMongocourse.entities.LinkedinUser;
+import com.joselucio.springMongocourse.entities.Posts;
 import com.joselucio.springMongocourse.services.UserService;
 
 @RestController
@@ -57,4 +58,9 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Posts>> findPosts(@PathVariable String id){
+		LinkedinUser user = userService.findById(id);
+		return ResponseEntity.ok().body(user.getPosts());
+	}
 }

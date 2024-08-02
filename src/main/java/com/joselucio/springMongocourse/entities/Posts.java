@@ -6,6 +6,8 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document
 public class Posts implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,6 +15,8 @@ public class Posts implements Serializable {
 	@Id
 	private String id;
 	private String message;
+	
+	@JsonIgnore
 	private LinkedinUser poster;
 	
 	public Posts() {
