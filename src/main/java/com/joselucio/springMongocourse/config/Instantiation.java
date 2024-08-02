@@ -26,6 +26,8 @@ public class Instantiation implements CommandLineRunner {
 		LinkedinUser bob = new LinkedinUser(null, "Bob Grey", "bob@gmail.com","bob@git.com");
 		LinkedinUser miles = new LinkedinUser(null, "Miles Yellow", "miles@gmail.com","miles@git.com");
 		userRepository.saveAll(Arrays.asList(maria,alex,bob,miles));
+		
+		
 	}
 	
 }

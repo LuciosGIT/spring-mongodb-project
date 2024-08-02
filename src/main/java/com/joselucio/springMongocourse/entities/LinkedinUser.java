@@ -1,6 +1,8 @@
 package com.joselucio.springMongocourse.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LinkedinUser implements Serializable{
@@ -10,6 +12,8 @@ public class LinkedinUser implements Serializable{
 	private String name;
 	private String email;
 	private String github;
+	
+	private List<Posts> posts = new ArrayList<>();
 	
 	public LinkedinUser() {
 		
@@ -54,7 +58,15 @@ public class LinkedinUser implements Serializable{
 	public void setGithub(String github) {
 		this.github = github;
 	}
+	
+	public List<Posts> getPosts() {
+		return posts;
+	}
 
+	public void setPosts(List<Posts> posts) {
+		this.posts = posts;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -71,5 +83,7 @@ public class LinkedinUser implements Serializable{
 		LinkedinUser other = (LinkedinUser) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 }
