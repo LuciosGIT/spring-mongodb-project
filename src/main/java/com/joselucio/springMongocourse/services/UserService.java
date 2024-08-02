@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.joselucio.springMongocourse.entities.LinkedinUser;
+import com.joselucio.springMongocourse.exceptions.ObjectNotFoundException;
 import com.joselucio.springMongocourse.repositories.UserRepository;
 
 @Service
@@ -21,7 +22,7 @@ public class UserService {
 	}
 	public LinkedinUser findById(String id) {
 		Optional<LinkedinUser> user = userRepository.findById(id);
-		return user.get();
+		return user.orElseThrow(() -> new ObjectNotFoundException("Object Not Found!"));
 	}
 	
 	public void insert(LinkedinUser obj) {
