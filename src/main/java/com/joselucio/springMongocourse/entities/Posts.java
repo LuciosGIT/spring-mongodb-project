@@ -1,6 +1,8 @@
 package com.joselucio.springMongocourse.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -18,6 +20,8 @@ public class Posts implements Serializable {
 	
 	@JsonIgnore
 	private LinkedinUser poster;
+	
+	private List<Comments> comments = new ArrayList<>();
 	
 	public Posts() {
 		
@@ -53,7 +57,13 @@ public class Posts implements Serializable {
 	public void setPoster(LinkedinUser poster) {
 		this.poster = poster;
 	}
+	public List<Comments> getComments() {
+		return comments;
+	}
 
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

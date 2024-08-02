@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import com.joselucio.springMongocourse.entities.Comments;
 import com.joselucio.springMongocourse.entities.LinkedinUser;
 import com.joselucio.springMongocourse.entities.Posts;
 import com.joselucio.springMongocourse.repositories.PostRepository;
@@ -42,11 +43,19 @@ public class Instantiation implements CommandLineRunner {
 		
 		postRepository.saveAll(Arrays.asList(p1,p2,p3));
 		
+		Comments c1 = new Comments("Wow, well done!", bob);
+		Comments c2 = new Comments("Great job!", miles);
+		
 		maria.getPosts().add(p1);
 		bob.getPosts().add(p2);
 		miles.getPosts().add(p3);
 		
+		p1.getComments().add(c1);
+		p3.getComments().add(c2);
+		
 		userRepository.saveAll(Arrays.asList(maria,bob,miles));
+		postRepository.saveAll(Arrays.asList(p1,p3));
+		
 	}
 	
 }
