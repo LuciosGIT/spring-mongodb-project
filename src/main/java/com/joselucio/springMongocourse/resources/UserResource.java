@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -38,6 +39,12 @@ public class UserResource {
 		LinkedinUser user = userService.findById(id);
 		return ResponseEntity.ok().body(user);
 }
+	@GetMapping(value = "/find")
+	public ResponseEntity<List<LinkedinUser>> findByName(@RequestParam String name){
+		List<LinkedinUser> list = userService.findByName(name);
+		return ResponseEntity.ok().body(list);
+}
+	
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody LinkedinUser obj){
 		userService.insert(obj);

@@ -47,4 +47,8 @@ public class UserService {
 		newObj.get().setGithub(obj.getGithub());
 		
 	}
+	
+	public List<LinkedinUser> findByName(String name) {
+		return userRepository.findByName(name);
+	}
 }
