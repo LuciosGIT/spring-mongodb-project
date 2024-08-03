@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
 import com.joselucio.springMongocourse.entities.LinkedinUser;
 import com.joselucio.springMongocourse.repositories.UserRepository;
+import com.joselucio.springMongocourse.util.UserCreator;
 
 @DataMongoTest
 @DisplayName("Test for User Repository")
@@ -23,7 +24,7 @@ class UserRepositoryTest {
 	@Test
 	@DisplayName("Save persists User when sucessful")
 	void save_PersistUser_WhenSucessful() {
-		LinkedinUser userToBeSaved = createUser();
+		LinkedinUser userToBeSaved = UserCreator.createUserToBeSaved();
 		LinkedinUser userSaved = this.userRepository.save(userToBeSaved);
 		
 		Assertions.assertThat(userSaved).isNotNull();
@@ -38,7 +39,7 @@ class UserRepositoryTest {
 	@Test
 	@DisplayName("Save updates User when sucessful")
 	void save_UpdatesUser_WhenSucessful() {
-		LinkedinUser userToBeSaved = createUser();
+		LinkedinUser userToBeSaved = UserCreator.createUserToBeSaved();
 		LinkedinUser userSaved = this.userRepository.save(userToBeSaved);
 		
 		userSaved.setName("Peter Crouch");
@@ -57,7 +58,7 @@ class UserRepositoryTest {
 	@Test
 	@DisplayName("Delete removes User when sucessful")
 	void delete_RemovesUser_WhenSucessful() {
-		LinkedinUser userToBeSaved = createUser();
+		LinkedinUser userToBeSaved = UserCreator.createUserToBeSaved();
 		LinkedinUser userSaved = this.userRepository.save(userToBeSaved);
 		
 		this.userRepository.delete(userSaved);
@@ -70,16 +71,14 @@ class UserRepositoryTest {
 	@Test
 	@DisplayName("Find By Name returns list of User when sucessful")
 	void findByName_ReturnsListOfUser_WhenSucessful() {
-		LinkedinUser userToBeSaved = createUser();
+		LinkedinUser userToBeSaved = UserCreator.createUserToBeSaved();
 		LinkedinUser userSaved = this.userRepository.save(userToBeSaved);
 		
 		String name = userSaved.getName();
 		
 		List<LinkedinUser> users = this.userRepository.findByName(name);
 		
-		Assertions.assertThat(users).isNotEmpty();
-		
-		Assertions.assertThat(users).contains(userSaved);
+		Assertions.assertThat(users).isNotEmpty().contains(userSaved);
 	}
 	
 
@@ -93,10 +92,5 @@ class UserRepositoryTest {
 		
 	}
 	
-	private LinkedinUser createUser() {
-		LinkedinUser user = new LinkedinUser();
-		user.setName("Kyle Walker");
-		return user;
-	}
 
 }
