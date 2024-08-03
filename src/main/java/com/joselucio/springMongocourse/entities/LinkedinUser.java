@@ -9,12 +9,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Document
 public class LinkedinUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private String id;
+	
+	@NotBlank(message = "The field might be filled with some user")
 	private String name;
 	private String email;
 	private String github;

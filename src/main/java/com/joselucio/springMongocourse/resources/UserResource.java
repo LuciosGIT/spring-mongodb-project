@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import com.joselucio.springMongocourse.entities.LinkedinUser;
 import com.joselucio.springMongocourse.entities.Posts;
 import com.joselucio.springMongocourse.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
@@ -29,9 +33,8 @@ public class UserResource {
 	
 	
 	@GetMapping
-	public ResponseEntity<List<LinkedinUser>>findAll(){
-		List<LinkedinUser> list = userService.findAll();
-		return ResponseEntity.ok().body(list);
+	public ResponseEntity<Page<LinkedinUser>>findAll(Pageable pageable){
+		return ResponseEntity.ok().body(userService.findAll(pageable));
 		
 }
 	@GetMapping(value = "/{id}")
@@ -46,7 +49,7 @@ public class UserResource {
 }
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody LinkedinUser obj){
+	public ResponseEntity<Void> insert(@RequestBody @Valid LinkedinUser obj){
 		userService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();

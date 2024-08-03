@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.joselucio.springMongocourse.entities.LinkedinUser;
@@ -16,9 +18,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<LinkedinUser> findAll(){
-		List<LinkedinUser> list = userRepository.findAll();
-		return list;
+	public Page<LinkedinUser> findAll(Pageable pageable){
+		return userRepository.findAll(pageable);
+		
 	}
 	public LinkedinUser findById(String id) {
 		Optional<LinkedinUser> user = userRepository.findById(id);
